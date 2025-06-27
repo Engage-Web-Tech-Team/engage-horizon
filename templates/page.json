@@ -60,7 +60,13 @@
       "type": "ew-3d-section",
       "name": "3D Hero Section",
       "settings": {
-        "section_bg_color": "#000000"
+        "section_bg_color": "#000000",
+        "title_color_from": "#ffffff",
+        "title_color_to": "#000000",
+        "button_text": "Shop now",
+        "button_link": "#",
+        "button_bg_color": "#ffffff",
+        "button_text_color": "#000000"
       }
     }
   },
