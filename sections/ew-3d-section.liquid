@@ -7,7 +7,19 @@
       "id": "section_bg_color",
       "label": "Background Color",
       "default": "#000000"
-    }
+    },
+    {
+  "type": "color",
+  "id": "title_color_from",
+  "label": "Title Colour (Start)",
+  "default": "#FFFFFF"
+},
+{
+  "type": "color",
+  "id": "title_color_to",
+  "label": "Title Colour (End)",
+  "default": "#000000"
+}
   ],
   "presets": [
     {
@@ -49,6 +61,7 @@
     text-transform: uppercase;
     margin-bottom: 1rem;
     opacity: 0;
+    color: {{ section.settings.title_color_from }};
   }
 
   .ew-3d-overlay a {
@@ -185,6 +198,11 @@ window.addEventListener('load', function () {
     end: 'bottom top',
     scrub: true
   }
+});
+
+      gsap.to('.ew-3d-overlay h1', {
+  color: '{{ section.settings.title_color_to }}',
+  scrollTrigger: scrollOptions,
 });
 
 
