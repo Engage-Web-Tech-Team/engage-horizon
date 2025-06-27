@@ -63,5 +63,35 @@
     {% if settings.quick_add or settings.mobile_quick_add %}
       {% render 'quick-add-modal' %}
     {% endif %}
+
+    {% assign use_gsap = false %}
+{% assign use_3d = false %}
+
+{% for section in content_for_layout %}
+  {% if section contains 'ew-gsap-section' %}
+    {% assign use_gsap = true %}
+  {% endif %}
+  {% if section contains 'ew-3d-section' %}
+    {% assign use_3d = true %}
+    {% assign use_gsap = true %}
+  {% endif %}
+{% endfor %}
+
+{% if use_gsap %}
+  <!-- GSAP -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+{% endif %}
+
+{% if use_3d %}
+  <!-- Three.js r147 (global scope) -->
+  <script src="https://unpkg.com/three@0.147.0/build/three.min.js"></script>
+
+  <!-- GLTFLoader (global, non-module) -->
+  <script src="https://unpkg.com/three@0.147.0/examples/js/loaders/GLTFLoader.js"></script>
+
+
+
+{% endif %}
   </body>
 </html>

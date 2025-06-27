@@ -1,0 +1,327 @@
+{% schema %}
+{
+  "name": "GSAP Image Slider",
+  "settings": [
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background Color",
+      "default": "#ffffff"
+    },
+
+    { "type": "image_picker", "id": "slide_1_img", "label": "Slide 1 Image" },
+    { "type": "text", "id": "slide_1_text", "label": "Slide 1 Title", "default": "Slide 1" },
+    { "type": "url", "id": "slide_1_link", "label": "Slide 1 Link" },
+    { "type": "text", "id": "slide_1_cta", "label": "Slide 1 Button Text", "default": "View Product" },
+    { "type": "color", "id": "slide_1_color_1", "label": "Slide 1 Gradient Color 1", "default": "#2ecc71" },
+    { "type": "color", "id": "slide_1_color_2", "label": "Slide 1 Gradient Color 2", "default": "#27ae60" },
+
+    { "type": "image_picker", "id": "slide_2_img", "label": "Slide 2 Image" },
+    { "type": "text", "id": "slide_2_text", "label": "Slide 2 Title", "default": "Slide 2" },
+    { "type": "url", "id": "slide_2_link", "label": "Slide 2 Link" },
+    { "type": "text", "id": "slide_2_cta", "label": "Slide 2 Button Text", "default": "View Product" },
+    { "type": "color", "id": "slide_2_color_1", "label": "Slide 2 Gradient Color 1", "default": "#9b59b6" },
+    { "type": "color", "id": "slide_2_color_2", "label": "Slide 2 Gradient Color 2", "default": "#8e44ad" },
+
+    { "type": "image_picker", "id": "slide_3_img", "label": "Slide 3 Image" },
+    { "type": "text", "id": "slide_3_text", "label": "Slide 3 Title", "default": "Slide 3" },
+    { "type": "url", "id": "slide_3_link", "label": "Slide 3 Link" },
+    { "type": "text", "id": "slide_3_cta", "label": "Slide 3 Button Text", "default": "View Product" },
+    { "type": "color", "id": "slide_3_color_1", "label": "Slide 3 Gradient Color 1", "default": "#3498db" },
+    { "type": "color", "id": "slide_3_color_2", "label": "Slide 3 Gradient Color 2", "default": "#2980b9" },
+
+    { "type": "image_picker", "id": "slide_4_img", "label": "Slide 4 Image" },
+    { "type": "text", "id": "slide_4_text", "label": "Slide 4 Title", "default": "Slide 4" },
+    { "type": "url", "id": "slide_4_link", "label": "Slide 4 Link" },
+    { "type": "text", "id": "slide_4_cta", "label": "Slide 4 Button Text", "default": "View Product" },
+    { "type": "color", "id": "slide_4_color_1", "label": "Slide 4 Gradient Color 1", "default": "#f39c12" },
+    { "type": "color", "id": "slide_4_color_2", "label": "Slide 4 Gradient Color 2", "default": "#e67e22" },
+
+    { "type": "image_picker", "id": "slide_5_img", "label": "Slide 5 Image" },
+    { "type": "text", "id": "slide_5_text", "label": "Slide 5 Title", "default": "Slide 5" },
+    { "type": "url", "id": "slide_5_link", "label": "Slide 5 Link" },
+    { "type": "text", "id": "slide_5_cta", "label": "Slide 5 Button Text", "default": "View Product" },
+    { "type": "color", "id": "slide_5_color_1", "label": "Slide 5 Gradient Color 1", "default": "#34495e" },
+    { "type": "color", "id": "slide_5_color_2", "label": "Slide 5 Gradient Color 2", "default": "#2c3e50" },
+
+    { "type": "image_picker", "id": "slide_6_img", "label": "Slide 6 Image" },
+    { "type": "text", "id": "slide_6_text", "label": "Slide 6 Title", "default": "Slide 6" },
+    { "type": "url", "id": "slide_6_link", "label": "Slide 6 Link" },
+    { "type": "text", "id": "slide_6_cta", "label": "Slide 6 Button Text", "default": "View Product" },
+    { "type": "color", "id": "slide_6_color_1", "label": "Slide 6 Gradient Color 1", "default": "#e74c3c" },
+    { "type": "color", "id": "slide_6_color_2", "label": "Slide 6 Gradient Color 2", "default": "#c0392b" }
+  ],
+  "presets": [
+    {
+      "name": "GSAP Image Slider"
+    }
+  ]
+}
+{% endschema %}
+
+<style>
+    .ew-gsap-section {
+      background-color: {{ section.settings.section_bg_color }};
+      transition: background 1.5s ease-in-out;
+    }
+
+    .ew-gsap-section * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .ew-gsap-section .wrapper {
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ew-gsap-section .slider {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      perspective: 500px;
+    }
+
+    @media (min-width: 768px) {
+      .ew-gsap-section .slider {
+        width: 800px;
+        height: 800px;
+      }
+    }
+
+    .ew-gsap-section .slide {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      backface-visibility: hidden;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ew-gsap-section .slide-content {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+
+    .ew-gsap-section .slide-content img {
+      max-width: 80%;
+      max-height: 80%;
+      object-fit: contain;
+      object-position: center center;
+      z-index: 1;
+      position: relative;
+    }
+
+    .ew-gsap-section .slide-content .title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: clamp(3rem, 6vw, 7rem);
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .slide-button {
+      display: inline-block;
+      margin-top: 1rem;
+      background-color: #ffffff;
+      color: #000000;
+      padding: 0.75rem 1.5rem;
+      border-radius: 4px;
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: background-color 0.3s ease;
+      z-index: 3;
+      position: relative;
+    }
+
+    .slide-button:hover {
+      background-color: #f1f1f1;
+    }
+
+  .slide-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .slide-overlay .title {
+    color: white;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: clamp(3rem, 6vw, 7rem);
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+    pointer-events: none;
+  }
+
+  .slide-overlay .slide-button {
+    margin-top: 130%; /* Previously 1rem or missing */
+    padding: 0.75rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #111;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 1.3rem;
+    pointer-events: auto; /* make it clickable */
+    transition: background 0.3s ease;
+  }
+
+  .slide-overlay .slide-button:hover {
+    background-color: white;
+  }
+</style>
+
+<div class="ew-gsap-section">
+  <div class="panel"></div>
+  <div class="wrapper center">
+    <div class="slider">
+      {% for i in (1..6) %}
+        {% capture img_key %}slide_{{ i }}_img{% endcapture %}
+        {% capture text_key %}slide_{{ i }}_text{% endcapture %}
+        {% capture link_key %}slide_{{ i }}_link{% endcapture %}
+        {% capture cta_key %}slide_{{ i }}_cta{% endcapture %}
+        {% assign image_obj = section.settings[img_key] %}
+        {% assign text = section.settings[text_key] %}
+        {% assign link = section.settings[link_key] %}
+        {% assign cta = section.settings[cta_key] %}
+
+        <div class="slide">
+          <div class="slide-content">
+            {% if image_obj %}
+              {{
+                image_obj
+                | image_url: width: 800
+                | image_tag:
+                  class: '',
+                  alt: text,
+                  width: image_obj.width,
+                  height: image_obj.height,
+                  sizes: '(min-width: 768px) 420px, 100vw',
+                  widths: '300, 420, 600, 800'
+              }}
+            {% endif %}
+            <div class="slide-overlay">
+              <div class="title">{{ text | truncate: 25, '' }}</div>
+              {% if link and cta %}
+                <a href="{{ link }}" class="slide-button">{{ cta }}</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="panel"></div>
+</div>
+
+
+<script>
+  window.ewGsapGradients = [
+    'linear-gradient(135deg, {{ section.settings.slide_1_color_1 }}, {{ section.settings.slide_1_color_2 }})',
+    'linear-gradient(135deg, {{ section.settings.slide_2_color_1 }}, {{ section.settings.slide_2_color_2 }})',
+    'linear-gradient(135deg, {{ section.settings.slide_3_color_1 }}, {{ section.settings.slide_3_color_2 }})',
+    'linear-gradient(135deg, {{ section.settings.slide_4_color_1 }}, {{ section.settings.slide_4_color_2 }})',
+    'linear-gradient(135deg, {{ section.settings.slide_5_color_1 }}, {{ section.settings.slide_5_color_2 }})',
+    'linear-gradient(135deg, {{ section.settings.slide_6_color_1 }}, {{ section.settings.slide_6_color_2 }})',
+  ];
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    if (typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') {
+      console.warn('GSAP or ScrollTrigger not loaded.');
+      return;
+    }
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const slides = gsap.utils.toArray('.ew-gsap-section .slide');
+    const transitionTime = 2;
+    const bgGradients = window.ewGsapGradients || [];
+
+    gsap.set('.ew-gsap-section', {
+      background: bgGradients[0],
+    });
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.ew-gsap-section .wrapper',
+        start: 'top top',
+        end: '+=' + slides.length * 200,
+        pin: true,
+        scrub: 1.5,
+      },
+    });
+
+    gsap.set(slides, {
+      rotationX: (i) => (i ? -90 : 0),
+      opacity: (i) => (i ? 0 : 1),
+      transformOrigin: 'center center -150px',
+    });
+
+    slides.forEach((slide, i) => {
+      const nextSlide = slides[i + 1];
+      if (!nextSlide) return;
+
+      const shiftedIndex = (i + 1) % bgGradients.length;
+
+      tl.to(slide, {
+        rotationX: 90,
+        opacity: 0,
+        duration: transitionTime,
+        ease: 'expo.inOut',
+        onComplete: () => gsap.set(slide, { rotationX: -90 }),
+      });
+
+      tl.to(
+        '.ew-gsap-section',
+        {
+          background: bgGradients[shiftedIndex],
+          duration: transitionTime,
+          ease: 'power2.inOut',
+        },
+        '<'
+      );
+
+      tl.to(
+        nextSlide,
+        {
+          rotationX: 0,
+          opacity: 1,
+          duration: transitionTime,
+          ease: 'expo.inOut',
+        },
+        '<'
+      );
+    });
+
+    tl.to({}, { duration: 1 });
+  });
+</script>
