@@ -19,7 +19,32 @@
   "id": "title_color_to",
   "label": "Title Colour (End)",
   "default": "#000000"
+},
+    {
+  "type": "text",
+  "id": "button_text",
+  "label": "Button Text",
+  "default": "Learn More"
+},
+{
+  "type": "text",
+  "id": "button_link",
+  "label": "Button Link",
+  "default": "#"
+},
+{
+  "type": "color",
+  "id": "button_bg_color",
+  "label": "Button Background Colour",
+  "default": "#FFFFFF"
+},
+{
+  "type": "color",
+  "id": "button_text_color",
+  "label": "Button Text Colour",
+  "default": "#000000"
 }
+
   ],
   "presets": [
     {
@@ -89,6 +114,12 @@
   .scroll-trigger-marker {
     height: 200vh;
   }
+  .ew-3d-overlay a {
+  opacity: 0;
+  transform: translateY(20px);
+  pointer-events: none;
+}
+
 </style>
 
 <div class="ew-3d-wrapper">
@@ -96,140 +127,153 @@
     <canvas id="three-canvas"></canvas>
     <div class="ew-3d-overlay">
       <h1>Your Title</h1>
-      <a href="#">Button</a>
+      <a
+  href="{{ section.settings.button_link }}"
+  style="background: {{ section.settings.button_bg_color }}; color: {{ section.settings.button_text_color }};"
+>
+  {{ section.settings.button_text }}
+</a>
+
     </div>
   </div>
 </div>
 
 <script>
-window.addEventListener('load', function () {
-  console.log("THREE loaded?", typeof THREE !== 'undefined');
-  console.log("GLTFLoader loaded?", typeof THREE.GLTFLoader !== 'undefined');
-  console.log("Three.js version:", THREE.REVISION);
+  window.addEventListener('load', function () {
+    console.log("THREE loaded?", typeof THREE !== 'undefined');
+    console.log("GLTFLoader loaded?", typeof THREE.GLTFLoader !== 'undefined');
+    console.log("Three.js version:", THREE.REVISION);
 
-  if (typeof THREE === 'undefined' || typeof THREE.GLTFLoader === 'undefined') {
-    console.warn('❌ Three.js or GLTFLoader is not loaded.');
-    return;
-  }
+    if (typeof THREE === 'undefined' || typeof THREE.GLTFLoader === 'undefined') {
+      console.warn('❌ Three.js or GLTFLoader is not loaded.');
+      return;
+    }
 
-  const canvas = document.getElementById('three-canvas');
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  camera.position.z = 3;
+    const canvas = document.getElementById('three-canvas');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.position.z = 3;
 
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
-  scene.add(ambientLight);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+    scene.add(ambientLight);
 
-  const loader = new THREE.GLTFLoader();
-  loader.load(
-    'https://cdn.shopify.com/3d/models/cfba46f45132959a/_ChronoForgeWeapon_0620124224_texture.glb',
-    function (gltf) {
-      const model = gltf.scene;
-      scene.add(model);
+    const loader = new THREE.GLTFLoader();
+    loader.load(
+      'https://cdn.shopify.com/3d/models/cfba46f45132959a/_ChronoForgeWeapon_0620124224_texture.glb',
+      function (gltf) {
+        const model = gltf.scene;
+        scene.add(model);
 
-      model.rotation.y = Math.PI;
-      model.scale.set(0.8, 0.8, 0.8);
-      model.position.set(0, 0, 0);
+        model.rotation.y = Math.PI;
+        model.scale.set(0.8, 0.8, 0.8);
+        model.position.set(0, 0, 0);
 
-      // === Entrance Animations ===
-      gsap.fromTo(model.rotation,
-        { y: model.rotation.y - 0.5 },
-        { y: model.rotation.y, duration: 2, ease: 'power3.out' }
-      );
+        // === Entrance Animations ===
+        gsap.fromTo(model.rotation,
+          { y: model.rotation.y - 0.5 },
+          { y: model.rotation.y, duration: 2, ease: 'power3.out' }
+        );
 
-      gsap.to('.ew-3d-overlay h1', {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: 'power2.out',
-        delay: 1.5
-      });
+        gsap.to('.ew-3d-overlay h1', {
+          opacity: 1,
+          y: 0,
+          duration: 1.2,
+          ease: 'power2.out',
+          delay: 1.5
+        });
 
-      gsap.to('.ew-3d-overlay a', {
-        opacity: 1,
-        y: 0,
-        duration: 1.2,
-        ease: 'power2.out',
-        delay: 2
-      });
-
-      // === GSAP ScrollTrigger Animations ===
-      gsap.registerPlugin(ScrollTrigger);
-
-      // Pin the section while scrolling
-      ScrollTrigger.create({
-        trigger: '.ew-3d-section',
-        start: 'top top',
-        end: '+=200%',
-        pin: true,
-        scrub: true
-      });
-
-      // Scroll-triggered animations (same range as pinned section)
-      const scrollOptions = {
-        trigger: '.ew-3d-section',
-        start: 'top top',
-        end: '+=150%',
-        scrub: true
-      };
-
-      // Model scales up
-      gsap.to(model.scale, {
-        x: 1.4,
-        y: 1.4,
-        z: 1.4,
-        scrollTrigger: scrollOptions
-      });
-
-      // Model shifts right
-      gsap.to(model.position, {
-        x: 1.5,
-        scrollTrigger: scrollOptions
-      });
-
-      // Overlay shifts left
-      gsap.to('.ew-3d-overlay', {
-  x: '-30vw', // better than xPercent
+gsap.to('.ew-3d-overlay a', {
+  opacity: 1,
+  y: 0,
+  pointerEvents: 'auto',
+  duration: 1,
+  ease: 'power2.out',
   scrollTrigger: {
     trigger: '.ew-3d-section',
-    start: 'top top',
+    start: 'bottom-=25% top',
     end: 'bottom top',
-    scrub: true
-  }
-});
-
-      gsap.to('.ew-3d-overlay h1', {
-  color: '{{ section.settings.title_color_to }}',
-  scrollTrigger: scrollOptions,
+    toggleActions: 'play none none reverse',
+  },
 });
 
 
-      // Background color changes
-      gsap.to('.ew-3d-section', {
-        backgroundColor: "#F4F4F4",
-        scrollTrigger: scrollOptions
-      });
+        // === GSAP ScrollTrigger Animations ===
+        gsap.registerPlugin(ScrollTrigger);
 
-      // Loop rotation
-      function animate() {
-        requestAnimationFrame(animate);
-        model.rotation.y += 0.002;
-        renderer.render(scene, camera);
-      }
-      animate();
-    },
-    undefined,
-    function (error) {
-      console.error('Error loading GLB model:', error);
+        // Pin the section while scrolling
+        ScrollTrigger.create({
+          trigger: '.ew-3d-section',
+          start: 'top top',
+          end: '+=200%',
+          pin: true,
+          scrub: true
+        });
+
+        // Scroll-triggered animations (same range as pinned section)
+        const scrollOptions = {
+          trigger: '.ew-3d-section',
+          start: 'top top',
+          end: '+=150%',
+          scrub: true
+        };
+
+        // Model scales up
+        gsap.to(model.scale, {
+          x: 1.4,
+          y: 1.4,
+          z: 1.4,
+          scrollTrigger: scrollOptions
+        });
+
+        // Model shifts right
+        gsap.to(model.position, {
+          x: 1.5,
+          scrollTrigger: scrollOptions
+        });
+
+        // Overlay shifts left
+        gsap.to('.ew-3d-overlay', {
+    x: '-30vw', // better than xPercent
+    scrollTrigger: {
+      trigger: '.ew-3d-section',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
     }
-  );
-
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
   });
-});
+
+        gsap.to('.ew-3d-overlay h1', {
+    color: '{{ section.settings.title_color_to }}',
+    scrollTrigger: scrollOptions,
+  });
+
+
+        // Background color changes
+        gsap.to('.ew-3d-section', {
+          backgroundColor: "#F4F4F4",
+          scrollTrigger: scrollOptions
+        });
+
+        // Loop rotation
+        function animate() {
+          requestAnimationFrame(animate);
+          model.rotation.y += 0.002;
+          renderer.render(scene, camera);
+        }
+        animate();
+      },
+      undefined,
+      function (error) {
+        console.error('Error loading GLB model:', error);
+      }
+    );
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+  });
 </script>
