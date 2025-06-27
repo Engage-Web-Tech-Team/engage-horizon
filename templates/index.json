@@ -6,7 +6,8 @@
  * or related systems. Please exercise caution as any changes
  * made to this file may be overwritten.
  * ------------------------------------------------------------
- */{
+ */
+{
   "sections": {
     "section_MgkEX9": {
       "type": "section",
@@ -68,6 +69,49 @@
         "gradient_direction": "to top",
         "padding-block-start": 48,
         "padding-block-end": 48
+      }
+    },
+    "ew_gsap_slider_PLEr3p": {
+      "type": "ew-gsap-slider",
+      "name": "GSAP Image Slider",
+      "settings": {
+        "section_bg_color": "#ffffff",
+        "slide_1_img": "shopify://shop_images/Wireless-Headphone-PNG-HD-Quality.png",
+        "slide_1_text": "Slide 1",
+        "slide_1_link": "",
+        "slide_1_cta": "View Product",
+        "slide_1_color_1": "#2ecc71",
+        "slide_1_color_2": "#27ae60",
+        "slide_2_img": "shopify://shop_images/1_iconANC_realtree-apx-black.webp",
+        "slide_2_text": "Slide 2",
+        "slide_2_link": "",
+        "slide_2_cta": "View Product",
+        "slide_2_color_1": "#9b59b6",
+        "slide_2_color_2": "#8e44ad",
+        "slide_3_img": "shopify://shop_images/cq5dam.web.1920.1920.png",
+        "slide_3_text": "Slide 3",
+        "slide_3_link": "",
+        "slide_3_cta": "View Product",
+        "slide_3_color_1": "#3498db",
+        "slide_3_color_2": "#2980b9",
+        "slide_4_img": "shopify://shop_images/headphones-png-5.png",
+        "slide_4_text": "Slide 4",
+        "slide_4_link": "",
+        "slide_4_cta": "View Product",
+        "slide_4_color_1": "#f39c12",
+        "slide_4_color_2": "#e67e22",
+        "slide_5_img": "shopify://shop_images/25B_Icon_ANC_S5IOW-T014_All_Love_BuyBox_1_1756dffd-cb3d-42cc-b040-a55caa71ae54.webp",
+        "slide_5_text": "Slide 5",
+        "slide_5_link": "",
+        "slide_5_cta": "View Product",
+        "slide_5_color_1": "#34495e",
+        "slide_5_color_2": "#2c3e50",
+        "slide_6_img": "shopify://shop_images/H20_BLA_IMG1.webp",
+        "slide_6_text": "Slide 6",
+        "slide_6_link": "",
+        "slide_6_cta": "View Product",
+        "slide_6_color_1": "#e74c3c",
+        "slide_6_color_2": "#c0392b"
       }
     },
     "collection_list_Ge6pfb": {
@@ -143,6 +187,7 @@
       },
       "name": "Collection list",
       "settings": {
+        "collection_list": [],
         "layout_type": "editorial",
         "carousel_on_mobile": false,
         "columns": 2,
@@ -168,6 +213,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
+            "link": "",
             "video_loop": true,
             "video_autoplay": false,
             "image_position": "cover",
@@ -214,6 +260,7 @@
               "type": "group",
               "name": "Description group",
               "settings": {
+                "link": "",
                 "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
@@ -309,6 +356,7 @@
               "type": "group",
               "name": "Button group",
               "settings": {
+                "link": "",
                 "open_in_new_tab": false,
                 "content_direction": "row",
                 "vertical_on_mobile": false,
@@ -363,6 +411,7 @@
                   "name": "Button",
                   "settings": {
                     "label": "Explore the collection",
+                    "link": "",
                     "open_in_new_tab": false,
                     "style_class": "button-secondary",
                     "width": "fit-content",
@@ -466,6 +515,7 @@
               "disabled": true,
               "settings": {
                 "label": "View all",
+                "link": "",
                 "open_in_new_tab": false,
                 "style_class": "link",
                 "width": "fit-content",
@@ -521,6 +571,7 @@
               "type": "group",
               "name": "t:names.group",
               "settings": {
+                "link": "",
                 "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
@@ -592,6 +643,12 @@
                     "type_preset": "",
                     "width": "100%",
                     "alignment": "left",
+                    "font": "var(--font-body--family)",
+                    "font_size": "1rem",
+                    "line_height": "normal",
+                    "letter_spacing": "normal",
+                    "case": "none",
+                    "color": "var(--color-foreground)",
                     "padding-block-start": 0,
                     "padding-block-end": 0,
                     "padding-inline-start": 0,
@@ -656,6 +713,7 @@
           "static": true,
           "settings": {
             "media_type": "image",
+            "link": "",
             "video_loop": true,
             "video_autoplay": false,
             "image_position": "cover",
@@ -702,6 +760,7 @@
               "type": "group",
               "name": "Description group",
               "settings": {
+                "link": "",
                 "open_in_new_tab": false,
                 "content_direction": "column",
                 "vertical_on_mobile": true,
@@ -797,6 +856,7 @@
               "type": "group",
               "name": "Button group",
               "settings": {
+                "link": "",
                 "open_in_new_tab": false,
                 "content_direction": "row",
                 "vertical_on_mobile": false,
@@ -851,6 +911,7 @@
                   "name": "Button",
                   "settings": {
                     "label": "Explore the collection",
+                    "link": "",
                     "open_in_new_tab": false,
                     "style_class": "button-secondary",
                     "width": "fit-content",
@@ -889,6 +950,7 @@
   },
   "order": [
     "section_MgkEX9",
+    "ew_gsap_slider_PLEr3p",
     "collection_list_Ge6pfb",
     "media_with_content_CwFqjm",
     "product_list_4HyKBg",
